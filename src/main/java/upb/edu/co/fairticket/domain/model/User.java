@@ -17,20 +17,25 @@ public class User {
     private String name;
     private Email email;
     private Role role;
+    private String passwordHash;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public static User createBuyer(String name, Email email) {
-        return new User(UUID.randomUUID(), name, email, Role.BUYER, LocalDateTime.now(), LocalDateTime.now());
+    public User(UUID id, String name, Email email, Role role, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this(id, name, email, role, "", createdAt, updatedAt);
     }
 
-    public static User createOrganizer(String name, Email email) {
-        return new User(UUID.randomUUID(), name, email, Role.ORGANIZER,
+    public static User createBuyer(String name, Email email, String passwordHash) {
+        return new User(UUID.randomUUID(), name, email, Role.BUYER, passwordHash, LocalDateTime.now(), LocalDateTime.now());
+    }
+
+    public static User createOrganizer(String name, Email email, String passwordHash) {
+        return new User(UUID.randomUUID(), name, email, Role.ORGANIZER, passwordHash,
                 LocalDateTime.now(), LocalDateTime.now());
     }
 
-    public static User createAdmin(String name, Email email) {
-        return new User(UUID.randomUUID(), name, email, Role.ADMIN,
+    public static User createAdmin(String name, Email email, String passwordHash) {
+        return new User(UUID.randomUUID(), name, email, Role.ADMIN, passwordHash,
                 LocalDateTime.now(), LocalDateTime.now());
     }
 
