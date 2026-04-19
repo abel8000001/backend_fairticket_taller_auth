@@ -1,13 +1,10 @@
 package upb.edu.co.fairticket.adapter.in.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import upb.edu.co.fairticket.adapter.in.rest.dto.request.RegisterUserRequest;
 import upb.edu.co.fairticket.adapter.in.rest.dto.request.ModifyUserRequest;
 import upb.edu.co.fairticket.adapter.in.rest.dto.response.UserResponse;
-import upb.edu.co.fairticket.domain.usecase.user.RegisterUserUseCase;
 import upb.edu.co.fairticket.domain.usecase.user.ListUserUseCase;
 import upb.edu.co.fairticket.domain.usecase.user.DeleteUserUseCase;
 import upb.edu.co.fairticket.domain.usecase.user.ModifyUserUseCase;
@@ -20,19 +17,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final RegisterUserUseCase registerUserUseCase;
     private final ListUserUseCase listUserUseCase;
     private final DeleteUserUseCase deleteUserUseCase;
     private final ModifyUserUseCase modifyUserUseCase;
-
-    @PostMapping
-    public ResponseEntity<UserResponse> register(@RequestBody RegisterUserRequest request) {
-        var user = switch (request.role().toUpperCase()) {
-            case "ORGANIZER" -> registerUserUseCase.registerOrganizer(request.name(), request.email());
-            default -> registerUserUseCase.registerBuyer(request.name(), request.email());
-        };
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserResponse.from(user));
-    }
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> list() {
