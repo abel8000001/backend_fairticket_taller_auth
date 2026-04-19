@@ -2,6 +2,7 @@ package upb.edu.co.fairticket.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import upb.edu.co.fairticket.domain.port.CryptoHasher;
 import upb.edu.co.fairticket.domain.port.EventRepository;
 import upb.edu.co.fairticket.domain.port.PurchaseRepository;
 import upb.edu.co.fairticket.domain.port.TicketRepository;
@@ -17,6 +18,7 @@ import upb.edu.co.fairticket.domain.usecase.ticket.CancelTicketUseCase;
 import upb.edu.co.fairticket.domain.usecase.ticket.GetTicketsUseCase;
 import upb.edu.co.fairticket.domain.usecase.user.DeleteUserUseCase;
 import upb.edu.co.fairticket.domain.usecase.user.ListUserUseCase;
+import upb.edu.co.fairticket.domain.usecase.user.LoginUseCase;
 import upb.edu.co.fairticket.domain.usecase.user.ModifyUserUseCase;
 import upb.edu.co.fairticket.domain.usecase.user.RegisterUserUseCase;
 
@@ -25,8 +27,13 @@ public class BeanConfig {
 
     // User Use Cases
     @Bean
-    public RegisterUserUseCase registerUserUseCase(UserRepository userRepository) {
-        return new RegisterUserUseCase(userRepository);
+    public RegisterUserUseCase registerUserUseCase(UserRepository userRepository, CryptoHasher cryptoHasher) {
+        return new RegisterUserUseCase(userRepository, cryptoHasher);
+    }
+
+    @Bean
+    public LoginUseCase loginUseCase(UserRepository userRepository, CryptoHasher cryptoHasher) {
+        return new LoginUseCase(userRepository, cryptoHasher);
     }
 
     @Bean

@@ -16,3 +16,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
+
+jwt:
+  signing:
+    secret: ${JWT_SIGNING_SECRET:change-this-secret-key-with-at-least-32-characters}
+    ttl: ${JWT_SIGNING_TTL:3600000}
