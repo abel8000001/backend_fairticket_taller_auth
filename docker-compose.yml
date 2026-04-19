@@ -10,6 +10,28 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - fairticket-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d fairticket"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  fairticket-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fairticket-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "6001:6001"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fairticket
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mysecretpassword
+      JWT_SIGNING_SECRET: change-this-secret-key-with-at-least-32-characters
+      JWT_SIGNING_TTL: 3600000
 
 volumes:
   fairticket-data:
