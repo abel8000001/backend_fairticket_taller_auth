@@ -28,7 +28,7 @@ class ModifyUserUseCaseTest {
     @Test
     void testExecuteSuccess() {
         UUID id = UUID.randomUUID();
-        User rigo = User.createBuyer("Rigoberto Urán", new Email("rigo@urrao.com"));
+        User rigo = User.createBuyer("Rigoberto Urán", new Email("rigo@urrao.com"), "hash-rigo");
         when(userRepository.findById(id)).thenReturn(Optional.of(rigo));
         when(userRepository.save(any(User.class))).thenAnswer(i -> i.getArguments()[0]);
 

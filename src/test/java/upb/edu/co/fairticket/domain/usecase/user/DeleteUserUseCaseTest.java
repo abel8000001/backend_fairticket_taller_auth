@@ -27,7 +27,7 @@ class DeleteUserUseCaseTest {
     @Test
     void testExecuteFound() {
         UUID id = UUID.randomUUID();
-        when(userRepository.findById(id)).thenReturn(Optional.of(User.createBuyer("Diomedes Díaz", new Email("cacique@junta.com"))));
+        when(userRepository.findById(id)).thenReturn(Optional.of(User.createBuyer("Diomedes Díaz", new Email("cacique@junta.com"), "hash-dio")));
 
         assertDoesNotThrow(() -> deleteUserUseCase.execute(id));
         verify(userRepository).deleteById(id);

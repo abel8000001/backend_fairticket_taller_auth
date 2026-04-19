@@ -38,7 +38,7 @@ class CreateEventUseCaseTest {
 
     @Test
     void testExecuteSuccessOrganizerJCorreal() {
-        User organizer = User.createOrganizer("Julio Correal", new Email("julio@correal.com"));
+        User organizer = User.createOrganizer("Julio Correal", new Email("julio@correal.com"), "hash-org");
         when(userRepository.findById(orgId)).thenReturn(Optional.of(organizer));
         when(eventRepository.save(any(Event.class))).thenAnswer(i -> i.getArguments()[0]);
 
@@ -52,7 +52,7 @@ class CreateEventUseCaseTest {
 
     @Test
     void testExecuteSuccessAdminBetty() {
-        User admin = User.createAdmin("Betty la Fea", new Email("betty@ecomoda.com"));
+        User admin = User.createAdmin("Betty la Fea", new Email("betty@ecomoda.com"), "hash-admin");
         when(userRepository.findById(orgId)).thenReturn(Optional.of(admin));
         when(eventRepository.save(any(Event.class))).thenAnswer(i -> i.getArguments()[0]);
 
@@ -65,7 +65,7 @@ class CreateEventUseCaseTest {
 
     @Test
     void testExecuteUnauthorizedBuyer() {
-        User buyer = User.createBuyer("Radamel Falcao", new Email("falcao@santamarta.com"));
+        User buyer = User.createBuyer("Radamel Falcao", new Email("falcao@santamarta.com"), "hash-buyer");
         when(userRepository.findById(orgId)).thenReturn(Optional.of(buyer));
 
         assertThrows(DomainException.class, () -> createEventUseCase.execute("Ev", "Desc", "Ven", date, date, date, 
