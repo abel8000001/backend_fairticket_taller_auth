@@ -1,0 +1,56 @@
+# Gradle build outputs
+.gradle/
+build/
+out/
+
+# Java compiled artifacts
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# Logs and runtime dumps
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.out
+*.err
+hs_err_pid*
+replay_pid*
+
+# Spring Boot local/dev overrides
+application-local.yaml
+application-local.yml
+application-dev.yaml
+application-dev.yml
+src/main/resources/application-local.yaml
+src/main/resources/application-local.yml
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDEs and editors
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Node leftovers if frontend tooling is added
+node_modules/
+
+# Test and coverage reports
+coverage/
+reports/
+
+# Docker local overrides
+docker-compose.override.yml

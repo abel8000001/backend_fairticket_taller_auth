@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: fairticket-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: fairticket
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    volumes:
+      - fairticket-data:/var/lib/postgresql/data
+
+volumes:
+  fairticket-data:
